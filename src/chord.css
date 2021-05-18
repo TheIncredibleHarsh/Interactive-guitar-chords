@@ -1,4 +1,4 @@
-table, th, td {
+th, td {
     border: 2px solid rgb(92, 86, 86);
     margin: 0;
     padding: 0;
@@ -6,7 +6,6 @@ table, th, td {
 
 table {
     border-collapse: collapse;
-    border-top: 20px solid rgb(92, 86, 86);
 }
 
 th {
@@ -20,6 +19,16 @@ td {
     width: 40px;
 }
 
+
+
+tr:first-child td {
+    border-top: 20px solid black;
+}
+
+tr td:last-child {
+    border: 0;
+}
+
 .dot {
     height: 25px;
     width: 25px;
@@ -28,4 +37,21 @@ td {
     display: inline-block;
     position: relative;
     left: -20px;
+}
+
+.capo {
+    height: 15px;
+    width: 40px;
+    background-color: rgb(68, 67, 67);
+    display: inline-block;
+    position: relative;
+}
+
+.capo-container {
+    overflow: visible;
+}
+
+.last-capo {
+    font-size: 32px;
+    font-weight: 600;
 }
