@@ -5,8 +5,8 @@ import Chord from './chord.jsx'
 function App() {
   var x;
   x = {
-    notes: [0,0,3,2,1,1],
-    capo: 3
+    notes: [0,0,5,7,8,7],
+    bar: null
   }
   return (
     <div className="App">

@@ -6,6 +6,8 @@ th, td {
 
 table {
     border-collapse: collapse;
+    table-layout: fixed;
+    overflow: visible;
 }
 
 th {
@@ -39,7 +41,7 @@ tr td:last-child {
     left: -20px;
 }
 
-.capo {
+.bar {
     height: 15px;
     width: 40px;
     background-color: rgb(68, 67, 67);
@@ -47,11 +49,17 @@ tr td:last-child {
     position: relative;
 }
 
-.capo-container {
+.bar-container {
     overflow: visible;
 }
 
-.last-capo {
+.last-bar {
     font-size: 32px;
     font-weight: 600;
+}
+
+.first-fret {
+    font-size: 14px;
+    font-style: italic;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
