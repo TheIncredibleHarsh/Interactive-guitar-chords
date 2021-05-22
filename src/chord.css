@@ -78,23 +78,6 @@ tr td:last-child {
     z-index: -1;
 }
 
-.bar {
-    height: 15px;
-    width: 40px;
-    background-color: rgb(68, 67, 67);
-    display: inline-block;
-    position: relative;
-}
-
-.bar-container {
-    overflow: visible;
-}
-
-.last-bar {
-    font-size: 32px;
-    font-weight: 600;
-}
-
 .first-fret {
     font-size: 14px;
     font-style: italic;

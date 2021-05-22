@@ -10,35 +10,11 @@ const Chord = (props) => {
     useEffect(() => {
         var min = 15;
         var positionsArray = positions;
-        positionsArray.forEach((value) => {
-            if(value<min && value !== 0){
-                min = value
-            }
-        });
-
-        if(min !== 15 && min >= 4){
-            props.chordShape.notes.forEach((value, index) => {
-                if(value !== 0){
-                    positionsArray[index] = value - min + 1;
-                }
-            });
-            // TODO: implement firstfret logic
-            // setFirstFret(min);
-        }
-
+        // if(props.chordShape.startingFret) {
+        //     setFirstFret(props.chordShape.startingFret);
+        // }
         changeChordShape(positionsArray);
     }, [props.chordShape])
-
-    const bar = []
-
-    for(var x=0;x<6;x++) {
-        if(x===5){
-            bar.push(<td className="bar-container"><span className="last-bar">{props.chordShape.bar}</span></td>)
-        } else {
-            bar.push(<td className="bar-container"><span className="bar"></span></td>)
-        }
-        
-    }
 
     const dotBlock = (i,j) => {
         return <td><div className="hover-container" row={i} column={j} onClick={(event) => pressString(event)}><span className="dot"></span></div></td>
@@ -78,20 +54,15 @@ const Chord = (props) => {
         });
         setChordArr(tempArray);
         setPositions([...notesArray]);
+        if(typeof props.handleChordChange === 'function') {
+            props.handleChordChange({notes: notesArray});
+        }
     }
 
     return <>
         <table>
             <tbody>
-                {props.chordShape.bar !== null &&
-                    <tr>
-                        {bar}
-                    </tr>
-                }
                 {chordArr.map((line, i) => {
-                    if(props.chordShape.bar !== null && i===4){
-                        return <tr></tr>
-                    }
                     return <tr>
                         {line.map((block, j) => {
                             if(chordArr[i][j] === 1){
