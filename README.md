@@ -1,4 +1,4 @@
-# Chords
+# Interactive Guitar Chords
 
 Interactive fret board diagram to place fingers and and see what chord is being formed. Fret board component created from scratch using basic tables and css.
 
