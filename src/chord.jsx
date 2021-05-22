@@ -4,20 +4,10 @@ import './chord.css'
 const Chord = (props) => {
 
     const [chordArr, setChordArr]       = useState(Array(5).fill(0).map(x => Array(6).fill(0)));
-    const [firstFret, setFirstFret]     = useState(1)
+    // const [firstFret, setFirstFret]     = useState(1)
     const [positions, setPositions]     = useState([...props.chordShape.notes])
 
     useEffect(() => {
-        debugger;
-        var tempArray; 
-        tempArray = [
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0]
-        ]
-
         var min = 15;
         var positionsArray = positions;
         positionsArray.forEach((value) => {
@@ -26,23 +16,18 @@ const Chord = (props) => {
             }
         });
 
-        if(min != 15 && min >= 4){
+        if(min !== 15 && min >= 4){
             props.chordShape.notes.forEach((value, index) => {
                 if(value !== 0){
                     positionsArray[index] = value - min + 1;
                 }
             });
-            setFirstFret(min);
+            // TODO: implement firstfret logic
+            // setFirstFret(min);
         }
 
-        positionsArray.forEach((value, index) => {
-            if (value !== 0) {
-                tempArray[value-1][index] = 1; 
-            }
-        });
-        setChordArr(tempArray);
-        setPositions(positionsArray);
-    }, [props.chordShape, positions])
+        changeChordShape(positionsArray);
+    }, [props.chordShape])
 
     const bar = []
 
@@ -55,11 +40,9 @@ const Chord = (props) => {
         
     }
 
-    // const emptyBlock = <td><div className="hover-container" row={i} column={j}><span className="dot-ghost"></span></div></td>;
     const dotBlock = (i,j) => {
         return <td><div className="hover-container" row={i} column={j} onClick={(event) => pressString(event)}><span className="dot"></span></div></td>
     }
-    // const firstFretBlock = <td><div className="hover-container"></div></td>;
     const emptyBlock = (i,j) => {
         return <td><div className="hover-container" row={i} column={j} onClick={(event) => pressString(event)}><span className="dot-ghost"></span></div></td>;
     }
@@ -68,10 +51,33 @@ const Chord = (props) => {
         let row = parseInt(event.target.getAttribute("row"))
         let column = parseInt(event.target.getAttribute("column"))
 
-        console.log(event.target.getAttribute("row")+ ", " + event.target.getAttribute("column"));
         let notesArray = [...positions]
-        notesArray[column] = row+1
-        setPositions(notesArray);
+        if(notesArray[column] === row+1){
+            notesArray[column] = 0
+        } else {
+            notesArray[column] = row+1
+        }
+
+        changeChordShape(notesArray);
+    }
+
+    const changeChordShape = (notesArray) => {
+        var tempArray; 
+        tempArray = [
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0]
+        ]
+
+        notesArray.forEach((value, index) => {
+            if (value !== 0) {
+                tempArray[value-1][index] = 1; 
+            }
+        });
+        setChordArr(tempArray);
+        setPositions([...notesArray]);
     }
 
     return <>
