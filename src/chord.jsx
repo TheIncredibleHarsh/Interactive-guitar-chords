@@ -5,8 +5,10 @@ const Chord = (props) => {
 
     const [chordArr, setChordArr]       = useState(Array(5).fill(0).map(x => Array(6).fill(0)));
     const [firstFret, setFirstFret]     = useState(1)
+    const [positions, setPositions]     = useState([...props.chordShape.notes])
 
     useEffect(() => {
+        debugger;
         var tempArray; 
         tempArray = [
             [0, 0, 0, 0, 0, 0],
@@ -17,7 +19,7 @@ const Chord = (props) => {
         ]
 
         var min = 15;
-        var positionsArray = [...props.chordShape.notes];
+        var positionsArray = positions;
         positionsArray.forEach((value) => {
             if(value<min && value !== 0){
                 min = value
@@ -39,7 +41,8 @@ const Chord = (props) => {
             }
         });
         setChordArr(tempArray);
-    }, [props.chordShape])
+        setPositions(positionsArray);
+    }, [props.chordShape, positions])
 
     const bar = []
 
@@ -50,6 +53,25 @@ const Chord = (props) => {
             bar.push(<td className="bar-container"><span className="bar"></span></td>)
         }
         
+    }
+
+    // const emptyBlock = <td><div className="hover-container" row={i} column={j}><span className="dot-ghost"></span></div></td>;
+    const dotBlock = (i,j) => {
+        return <td><div className="hover-container" row={i} column={j} onClick={(event) => pressString(event)}><span className="dot"></span></div></td>
+    }
+    // const firstFretBlock = <td><div className="hover-container"></div></td>;
+    const emptyBlock = (i,j) => {
+        return <td><div className="hover-container" row={i} column={j} onClick={(event) => pressString(event)}><span className="dot-ghost"></span></div></td>;
+    }
+    const pressString = (event) => {
+        event.stopPropagation();
+        let row = parseInt(event.target.getAttribute("row"))
+        let column = parseInt(event.target.getAttribute("column"))
+
+        console.log(event.target.getAttribute("row")+ ", " + event.target.getAttribute("column"));
+        let notesArray = [...positions]
+        notesArray[column] = row+1
+        setPositions(notesArray);
     }
 
     return <>
@@ -67,12 +89,14 @@ const Chord = (props) => {
                     return <tr>
                         {line.map((block, j) => {
                             if(chordArr[i][j] === 1){
-                                return <td><span className="dot"></span></td>
+                                // return <td><span className="dot"></span>{emptyBlock}</td>
+                                return dotBlock(i,j);
                             }
-                            if(firstFret > 1 && j===5 && i===0){
-                                return <td><span className="first-fret">{"fret " + firstFret}</span></td>
-                            }
-                            return <td></td>
+                            // if(firstFret > 1 && j===5 && i===0){
+                            //     // return <td><span className="first-fret">{"fret " + firstFret}</span></td>
+                            //     return emptyBlock;
+                            // }
+                            return emptyBlock(i,j)
                         })}
                     </tr>
                 })}
