@@ -38,7 +38,12 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <Chord chordShape={x} handleChordChange={handleChordChange}/><span>{currentChord}</span>
+        <div className="chord-container">
+          <Chord chordShape={x} handleChordChange={handleChordChange}/>
+        </div>
+        <div className="info-container">
+          <span className="curr-chord">{currentChord}</span>
+        </div>
       </div>
     </div>
   );
