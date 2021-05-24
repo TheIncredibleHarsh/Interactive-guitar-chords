@@ -51,7 +51,6 @@ body {
   justify-content: center;
   height: 100%;
   width: 100%;
-  border: 2px solid yellow;
 }
 
 .chord-container {
@@ -69,6 +68,7 @@ body {
   width: 50%;
   height: 60%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 5px;
@@ -80,4 +80,21 @@ body {
   font-weight: 800;
   color: #FEFDFF;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.chord-dropdown {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  bottom: 0px;
+  width: 300px;
+  height: 30%;
+}
+
+.curr-chord-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
 }

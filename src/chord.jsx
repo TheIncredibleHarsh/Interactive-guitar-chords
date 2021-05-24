@@ -9,7 +9,7 @@ const Chord = (props) => {
 
     useEffect(() => {
         var min = 15;
-        var positionsArray = positions;
+        var positionsArray = [...props.chordShape.notes];
         // if(props.chordShape.startingFret) {
         //     setFirstFret(props.chordShape.startingFret);
         // }
